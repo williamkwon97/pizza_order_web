@@ -6,10 +6,6 @@ certifi
 cffi
 charset-normalizer
 click
-conda-content-trust
-conda-libmamba-solver
-conda-package-handling
-conda-package-streaming
 cryptography
 distro
 Flask
