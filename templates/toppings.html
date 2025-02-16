@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Manage Toppings</h2>
+<form method="POST">
+    {{ form.hidden_tag() }}
+    <div class="mb-3">
+        {{ form.name.label }} {{ form.name(class="form-control") }}
+    </div>
+    <button type="submit" class="btn btn-primary">{{ form.submit.label }}</button>
+</form>
+
+<h3 class="mt-4">Available Toppings</h3>
+<ul class="list-group">
+    {% for topping in toppings %}
+        <li class="list-group-item">{{ topping.name }}</li>
+    {% endfor %}
+</ul>
+{% endblock %}

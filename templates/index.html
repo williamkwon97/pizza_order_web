@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Pizza Menu</h2>
+<ul class="list-group">
+    {% for pizza in pizzas %}
+        <li class="list-group-item">
+            <strong>{{ pizza.name }}</strong> - 
+
+            Toppings: {% for t in pizza.toppings %}{{ t.name }}{% if not loop.last %}, {% endif %}{% endfor %}
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}

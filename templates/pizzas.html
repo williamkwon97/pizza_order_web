@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Create a Pizza</h2>
+<form method="POST">
+    {{ form.hidden_tag() }}
+    <div class="mb-3">
+        {{ form.name.label }} {{ form.name(class="form-control") }}
+    </div>
+    <div class="mb-3">
+        {{ form.toppings.label }} 
+        <select multiple class="form-control" name="toppings">
+            {% for id, name in form.toppings.choices %}
+                <option value="{{ id }}">{{ name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <button type="submit" class="btn btn-success">{{ form.submit.label }}</button>
+</form>
+
+<h3 class="mt-4">Existing Pizzas</h3>
+<ul class="list-group">
+    {% for pizza in pizzas %}
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            <strong>{{ pizza.name }}</strong> - 
+            Toppings: {% for t in pizza.toppings %}{{ t.name }}{% if not loop.last %}, {% endif %}{% endfor %}
+            <form method="POST" action="{{ url_for('delete_pizza', pizza_id=pizza.id) }}" style="display:inline;">
+                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+            </form>
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}
