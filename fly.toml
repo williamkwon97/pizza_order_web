@@ -5,8 +5,8 @@
 
 app = 'pizza-order-web'
 primary_region = 'dfw'
+dockerfile = "Dockerfile"
 
-[build]
 
 [http_service]
   internal_port = 8080
