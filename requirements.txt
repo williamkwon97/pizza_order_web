@@ -6,7 +6,6 @@ certifi
 cffi
 charset-normalizer
 click
-conda
 conda-content-trust
 conda-libmamba-solver
 conda-package-handling
