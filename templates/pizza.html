@@ -11,7 +11,8 @@
         {{ form.toppings.label }} 
         <select multiple class="form-control" name="toppings">
             {% for id, name in form.toppings.choices %}
-                <option value="{{ id }}" {% if form.toppings.data and id in form.toppings.data %}selected{% endif %}>{{ name }}</option>
+            <option value="{{ id }}" {% if form.toppings.data and id in form.toppings.data %}selected{% endif %}>{{ name }}</option>
+
             {% endfor %}
         </select>
     </div>

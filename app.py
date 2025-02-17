@@ -36,7 +36,7 @@ class ToppingForm(FlaskForm):
 class PizzaForm(FlaskForm):
     name = StringField('Pizza Name', validators=[DataRequired()])
     toppings = SelectMultipleField('Toppings', coerce=int)
-    submit = SubmitField('Create Pizza')
+    submit = SubmitField('Submit')
 
 # Routes
 @app.route('/')
@@ -58,6 +58,42 @@ def manage_toppings():
         return redirect(url_for('manage_toppings'))
     toppings = Topping.query.all()
     return render_template('toppings.html', form=form, toppings=toppings)
+@app.route('/delete_topping/<int:topping_id>', methods=['POST'])
+def delete_topping(topping_id):
+    topping = Topping.query.get_or_404(topping_id)
+    db.session.delete(topping)
+    db.session.commit()
+    flash('Topping deleted successfully!', 'success')
+    return redirect(url_for('manage_toppings'))
+
+@app.route('/update_topping/<int:topping_id>', methods=['GET', 'POST'])
+def update_topping(topping_id):
+    topping = Topping.query.get_or_404(topping_id)
+    form = ToppingForm(obj=topping)
+    
+    if form.validate_on_submit():
+        topping.name = form.name.data
+        db.session.commit()
+        flash('Topping updated successfully!', 'success')
+        return redirect(url_for('manage_toppings'))
+    
+    return render_template('update_topping.html', form=form, topping=topping)
+@app.route('/update_pizza/<int:pizza_id>', methods=['GET', 'POST'])
+def update_pizza(pizza_id):
+    pizza = Pizza.query.get_or_404(pizza_id)
+    form = PizzaForm(obj=pizza)
+    
+    # Populate toppings choices with the available toppings
+    form.toppings.choices = [(t.id, t.name) for t in Topping.query.all()]
+    
+    if form.validate_on_submit():
+        pizza.name = form.name.data
+        pizza.toppings = Topping.query.filter(Topping.id.in_(form.toppings.data)).all()
+        db.session.commit()
+        flash('Pizza updated successfully!', 'success')
+        return redirect(url_for('manage_pizzas'))
+    
+    return render_template('pizza.html', form=form, pizza=pizza, pizzas=Pizza.query.all())
 
 @app.route('/pizzas', methods=['GET', 'POST'])
 def manage_pizzas():
