@@ -22,12 +22,16 @@
 <ul class="list-group">
     {% for pizza in pizzas %}
         <li class="list-group-item d-flex justify-content-between align-items-center">
-            <strong>{{ pizza.name }}</strong> - 
-            Toppings: {% for t in pizza.toppings %}{{ t.name }}{% if not loop.last %}, {% endif %}{% endfor %}
-            <a href="{{ url_for('update_pizza', pizza_id=pizza.id) }}" class="btn btn-warning btn-sm">Edit</a>
-            <form method="POST" action="{{ url_for('delete_pizza', pizza_id=pizza.id) }}" style="display:inline;">
-                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-            </form>
+            <div>
+                <strong>{{ pizza.name }}</strong> - 
+                Toppings: {% for t in pizza.toppings %}{{ t.name }}{% if not loop.last %}, {% endif %}{% endfor %}
+            </div>
+            <div class="ml-auto">
+                <a href="{{ url_for('update_pizza', pizza_id=pizza.id) }}" class="btn btn-warning btn-sm">Edit</a>
+                <form method="POST" action="{{ url_for('delete_pizza', pizza_id=pizza.id) }}" style="display:inline;">
+                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                </form>
+            </div>
         </li>
     {% endfor %}
 </ul>
