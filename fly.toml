@@ -1,12 +1,12 @@
-# fly.toml app configuration file generated for pizza-order-web on 2025-02-16T17:20:12-06:00
+# fly.toml app configuration file generated for pizza-order-web-broken-sun-4994 on 2025-02-16T17:52:32-06:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'pizza-order-web'
+app = 'pizza-order-web-broken-sun-4994'
 primary_region = 'dfw'
-dockerfile = "Dockerfile"
 
+[build]
 
 [http_service]
   internal_port = 8080

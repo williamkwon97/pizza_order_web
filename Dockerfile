@@ -2,7 +2,7 @@
 
 ARG PYTHON_VERSION=3.12.4
 
-FROM python:${PYTHON_VERSION}-buster
+FROM python:${PYTHON_VERSION}
 
 LABEL fly_launch_runtime="flask"
 
