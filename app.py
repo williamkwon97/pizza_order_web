@@ -3,12 +3,11 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, SelectMultipleField
 from wtforms.validators import DataRequired
-
+from flask_pymongo import PyMongo 
+import os
 app = Flask(__name__)
-#app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://pizza_user:asdf@localhost/pizza_order_db'
-#postgresql://postgres:XjfHp8EQxpkRFJK@pizza-order-db.flycast:5432'
-#postgres://postgres:mXiIYrGau82YvPd@pizza-db.flycast:5432
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
+
+app.config['SQLALCHEMY_DATABASE_URI'] =os.getenv('DATABASE_URL')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 app.config['SECRET_KEY'] = 'asodkglasdjga12r1!$##j'
